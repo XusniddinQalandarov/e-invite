@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream: #FAF6F0;
+  --color-gold: #C9A84C;
+  --color-gold-light: #E8C97A;
+  --color-dark: #1A1207;
+  --color-text: #3D2B1F;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+@keyframes float {
+  from { transform: translateY(0px) scale(1); opacity: 0.2; }
+  to { transform: translateY(-20px) scale(1.5); opacity: 0.5; }
+}
+
+@keyframes shimmer-line {
+  from { opacity: 0.05; transform: translateX(-10%); }
+  to { opacity: 0.2; transform: translateX(10%); }
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}
