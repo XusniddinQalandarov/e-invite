@@ -24,8 +24,15 @@ export function TemplateCard({ template }: Props) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {/* Overlay on hover */}
         <div className="absolute inset-0 bg-dark/0 group-hover:bg-dark/10 transition-colors duration-300" />
+        {/* Label badge overlaid on image */}
+        {template.label && (
+          <div className="absolute top-3 left-3">
+            <span className="px-2.5 py-1 text-[10px] font-body font-medium tracking-wider uppercase rounded bg-gold text-dark shadow-sm">
+              {template.label}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Card body */}
@@ -34,7 +41,7 @@ export function TemplateCard({ template }: Props) {
           <h3 className="font-display text-lg text-dark leading-tight">{template.name}</h3>
           <Badge variant="style">{t.styles[template.style]}</Badge>
         </div>
-        <p className="font-body text-sm text-brand-text/50">{t.common.price}</p>
+        <p className="font-body text-sm text-gold font-medium">{template.priceLabel}</p>
         <Link href={`/editor/${template.id}`} className="block">
           <Button variant="primary" size="sm" className="w-full">
             {t.common.customize}

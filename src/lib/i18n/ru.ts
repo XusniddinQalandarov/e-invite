@@ -17,12 +17,6 @@ export const ru: Strings = {
     step2: { title: "Настройте", desc: "Введите свои данные" },
     step3: { title: "Поделитесь", desc: "Отправьте ссылку гостям" },
   },
-  pricing: {
-    title: "Цена",
-    price: "150 000 сум",
-    description: "Единоразовая оплата, вечная ссылка",
-    cta: "Начать сейчас",
-  },
   editor: {
     brideName: "Имя невесты",
     groomName: "Имя жениха",
@@ -30,6 +24,7 @@ export const ru: Strings = {
     weddingTime: "Время свадьбы",
     venueName: "Место проведения",
     venueAddress: "Адрес",
+    mapUrl: "Ссылка на карту (Google Maps / Яндекс Карты)",
     photo: "Фото пары (необязательно)",
     language: "Язык приглашения",
     saveDraft: "Сохранить черновик",
@@ -61,7 +56,6 @@ export const ru: Strings = {
   },
   common: {
     customize: "Настроить",
-    price: "150 000 сум",
     loading: "Загрузка...",
   },
 }

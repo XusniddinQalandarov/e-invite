@@ -1,6 +1,5 @@
 import { Hero } from '@/components/landing/Hero'
 import { HowItWorks } from '@/components/landing/HowItWorks'
-import { PricingSection } from '@/components/landing/PricingSection'
 import { templateConfigs } from '@/lib/templates/templateConfigs'
 import { TemplateGrid } from '@/components/templates/TemplateGrid'
 
@@ -24,8 +23,6 @@ export default function LandingPage() {
           <TemplateGrid templates={templateConfigs} />
         </div>
       </section>
-
-      <PricingSection />
 
       {/* Footer */}
       <footer className="bg-dark border-t border-gold/10 py-10">

@@ -3,6 +3,7 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
+import { Check } from 'lucide-react'
 import { InvitationCanvas } from '@/components/canvas/InvitationCanvas'
 import { EditorForm, type InvitationFormData } from '@/components/editor/EditorForm'
 import { getTemplateById } from '@/lib/templates/templateConfigs'
@@ -38,6 +39,7 @@ export default function EditorPage() {
           weddingTime: inv.weddingTime,
           venueName: inv.venueName,
           venueAddress: inv.venueAddress,
+          mapUrl: inv.mapUrl,
           language: inv.language,
           photoUrl: inv.photoUrl,
         })
@@ -107,8 +109,9 @@ export default function EditorPage() {
               <div className="flex items-center justify-between mb-6">
                 <h1 className="font-display text-2xl text-dark">{template.name}</h1>
                 {savedMsg && (
-                  <span className="text-xs font-body text-emerald-600 animate-pulse">
-                    Saved ✓
+                  <span className="inline-flex items-center gap-1 text-xs font-body text-emerald-600 animate-pulse">
+                    <Check size={13} strokeWidth={2.5} />
+                    Saved
                   </span>
                 )}
               </div>

@@ -20,6 +20,7 @@ export default async function CheckoutPage({ params }: Props) {
     <CheckoutClient
       invitation={invitation}
       templateName={template?.name ?? 'Unknown Template'}
+      templatePrice={template?.priceLabel ?? '149 000 so\'m'}
     />
   )
 }

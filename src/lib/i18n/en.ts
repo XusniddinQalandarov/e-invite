@@ -17,12 +17,6 @@ export const en: Strings = {
     step2: { title: "Customize", desc: "Enter your wedding details" },
     step3: { title: "Share", desc: "Send the link to your guests" },
   },
-  pricing: {
-    title: "Pricing",
-    price: "150,000 UZS",
-    description: "One-time payment, permanent link",
-    cta: "Get Started",
-  },
   editor: {
     brideName: "Bride's name",
     groomName: "Groom's name",
@@ -30,6 +24,7 @@ export const en: Strings = {
     weddingTime: "Wedding time",
     venueName: "Venue name",
     venueAddress: "Address",
+    mapUrl: "Map link (Google Maps / Yandex Maps)",
     photo: "Couple photo (optional)",
     language: "Invitation language",
     saveDraft: "Save Draft",
@@ -61,7 +56,6 @@ export const en: Strings = {
   },
   common: {
     customize: "Customize",
-    price: "150,000 UZS",
     loading: "Loading...",
   },
 }

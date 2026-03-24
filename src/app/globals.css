@@ -42,3 +42,26 @@ h1, h2, h3, h4 {
 .bg-gradient-radial {
   background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
 }
+
+@keyframes loader-star-twinkle {
+  from { opacity: var(--tw-opacity, 0.2); transform: scale(1); }
+  to   { opacity: calc(var(--tw-opacity, 0.2) + 0.5); transform: scale(1.4); }
+}
+
+@keyframes loader-gold-rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  15%  { opacity: 0.8; }
+  80%  { opacity: 0.4; }
+  100% { transform: translateY(-80vh) scale(0.4); opacity: 0; }
+}
+
+@keyframes loader-line-appear {
+  from { opacity: 0; width: 0; }
+  to   { opacity: 1; width: 200px; }
+}
+
+@keyframes petal-fall {
+  0% { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  100% { transform: translateY(100vh) rotate(720deg) translateX(30px); opacity: 0; }
+}

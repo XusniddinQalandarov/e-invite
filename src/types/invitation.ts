@@ -7,6 +7,7 @@ export interface Invitation {
   weddingTime: string
   venueName: string
   venueAddress?: string
+  mapUrl?: string
   photoUrl?: string
   language: 'uz' | 'ru' | 'en'
   status: 'draft' | 'paid'

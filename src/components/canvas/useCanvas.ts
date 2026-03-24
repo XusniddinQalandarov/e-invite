@@ -17,6 +17,28 @@ async function getFabric() {
   return fabric
 }
 
+/** When a template has no photoArea, still show the couple photo in a centered circle. */
+const DEFAULT_PHOTO_AREA = {
+  left: 275,
+  top: 100,
+  width: 250,
+  height: 250,
+  clipShape: 'circle' as const,
+}
+
+function isLikelyImageDataUrl(url: string): boolean {
+  return url.startsWith('data:image/')
+}
+
+function isHttpImageUrl(url: string): boolean {
+  try {
+    const u = new URL(url)
+    return u.protocol === 'http:' || u.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 function getFieldValue(data: Partial<Invitation>, key: string): string {
   const map: Record<string, keyof Invitation> = {
     brideName: 'brideName',
@@ -64,11 +86,20 @@ export function useCanvas(
       })
       fabricRef.current = canvas
 
-      // Background
+      // Background — cover the entire 800×1000 canvas
       const bg = await FabricImage.fromURL(template.backgroundUrl, { crossOrigin: 'anonymous' })
       if (cancelled) { canvas.dispose(); return }
-      bg.scaleToWidth(800)
-      bg.scaleToHeight(1000)
+      const imgW = bg.width ?? 1
+      const imgH = bg.height ?? 1
+      const scale = Math.max(800 / imgW, 1000 / imgH)
+      bg.set({
+        scaleX: scale,
+        scaleY: scale,
+        left: (800 - imgW * scale) / 2,
+        top: (1000 - imgH * scale) / 2,
+        originX: 'left',
+        originY: 'top',
+      })
       canvas.set('backgroundImage', bg)
 
       // Text fields
@@ -105,25 +136,47 @@ export function useCanvas(
       }
       decorObjectsRef.current = decors
 
-      // Photo
-      if (data.photoUrl && template.photoArea) {
-        const area = template.photoArea
-        const img = await FabricImage.fromURL(data.photoUrl)
-        if (!cancelled) {
-          img.scaleToWidth(area.width)
-          img.scaleToHeight(area.height)
-          img.set({ left: area.left, top: area.top, selectable: false, evented: false })
-          if (area.clipShape === 'circle') {
-            const radius = Math.min(area.width, area.height) / 2
-            img.clipPath = new Circle({
-              radius,
-              left: -radius,
-              top: -radius,
-              originX: 'left',
-              originY: 'top',
+      // Photo — base64 or direct image URLs only (skip accidental page links)
+      const rawPhoto = data.photoUrl?.trim()
+      if (
+        rawPhoto &&
+        (isLikelyImageDataUrl(rawPhoto) || isHttpImageUrl(rawPhoto))
+      ) {
+        const area = template.photoArea ?? DEFAULT_PHOTO_AREA
+        try {
+          const img = await FabricImage.fromURL(rawPhoto)
+          if (!cancelled) {
+            // Cover-style: scale to fill the area, then clip
+            const natW = img.width ?? 1
+            const natH = img.height ?? 1
+            const scale = Math.max(area.width / natW, area.height / natH)
+            img.set({
+              scaleX: scale,
+              scaleY: scale,
+              // Center the image inside the area
+              left: area.left + area.width / 2,
+              top: area.top + area.height / 2,
+              originX: 'center',
+              originY: 'center',
+              selectable: false,
+              evented: false,
             })
+            if (area.clipShape === 'circle') {
+              const radius = Math.min(area.width, area.height) / 2
+              // absolutePositioned: true → clip uses canvas coords, not local object coords
+              img.clipPath = new Circle({
+                radius,
+                originX: 'center',
+                originY: 'center',
+                left: area.left + area.width / 2,
+                top: area.top + area.height / 2,
+                absolutePositioned: true,
+              })
+            }
+            canvas.add(img)
           }
-          canvas.add(img)
+        } catch {
+          // Invalid or blocked image — skip so the invitation still renders
         }
       }
 
@@ -167,7 +220,7 @@ export function useCanvas(
       readyRef.current = false
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasEl, template.id, isPurchased])
+  }, [canvasEl, template.id, isPurchased, data.photoUrl])
 
   // Live-update text fields when form data changes
   const updateField = useCallback((key: string, value: string) => {

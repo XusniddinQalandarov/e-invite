@@ -15,12 +15,6 @@ export interface Strings {
     step2: { title: string; desc: string }
     step3: { title: string; desc: string }
   }
-  pricing: {
-    title: string
-    price: string
-    description: string
-    cta: string
-  }
   editor: {
     brideName: string
     groomName: string
@@ -28,6 +22,7 @@ export interface Strings {
     weddingTime: string
     venueName: string
     venueAddress: string
+    mapUrl: string
     photo: string
     language: string
     saveDraft: string
@@ -59,7 +54,6 @@ export interface Strings {
   }
   common: {
     customize: string
-    price: string
     loading: string
   }
 }
@@ -81,12 +75,6 @@ export const uz: Strings = {
     step2: { title: "Moslashtiring", desc: "Ma'lumotlaringizni kiriting" },
     step3: { title: "Ulashing", desc: "Havolani do'stlaringizga yuboring" },
   },
-  pricing: {
-    title: "Narx",
-    price: "150 000 so'm",
-    description: "Bir martalik to'lov, umrbod havola",
-    cta: "Hozir boshlash",
-  },
   editor: {
     brideName: "Kelinchak ismi",
     groomName: "Kuyov ismi",
@@ -94,6 +82,7 @@ export const uz: Strings = {
     weddingTime: "To'y vaqti",
     venueName: "To'y joyi",
     venueAddress: "Manzil",
+    mapUrl: "Xarita havolasi (Google Maps / Yandex Maps)",
     photo: "Juft surati (ixtiyoriy)",
     language: "Taklifnoma tili",
     saveDraft: "Qoralamani saqlash",
@@ -125,7 +114,6 @@ export const uz: Strings = {
   },
   common: {
     customize: "Moslashtirish",
-    price: "150 000 so'm",
     loading: "Yuklanmoqda...",
   },
 }

@@ -9,7 +9,7 @@ import type { Invitation } from '@/types/invitation'
 
 export type InvitationFormData = Pick<
   Invitation,
-  'brideName' | 'groomName' | 'weddingDate' | 'weddingTime' | 'venueName' | 'venueAddress' | 'language'
+  'brideName' | 'groomName' | 'weddingDate' | 'weddingTime' | 'venueName' | 'venueAddress' | 'mapUrl' | 'language'
 > & { photoUrl?: string }
 
 interface Props {
@@ -27,6 +27,7 @@ const DEFAULT_DATA: InvitationFormData = {
   weddingTime: '',
   venueName: '',
   venueAddress: '',
+  mapUrl: '',
   language: 'uz',
   photoUrl: undefined,
 }
@@ -109,6 +110,13 @@ export function EditorForm({ initialData, onDataChange, onSave, onPurchase, isSa
         onChange={e => update('venueAddress', e.target.value)}
         maxLength={200}
         placeholder="Toshkent sh., Mirzo Ulug'bek ko'chasi"
+      />
+      <Input
+        label={t.editor.mapUrl}
+        type="url"
+        value={data.mapUrl ?? ''}
+        onChange={e => update('mapUrl', e.target.value)}
+        placeholder="https://maps.google.com/..."
       />
 
       <div className="flex flex-col gap-1.5">

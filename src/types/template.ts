@@ -34,6 +34,9 @@ export type DecorativeElement =
 export interface TemplateConfig {
   id: string
   name: string
+  label?: string          // badge shown on template card, e.g. "Mashhur", "Premium"
+  price: number           // price in so'm
+  priceLabel: string      // formatted display string
   style: 'floral' | 'islamic' | 'uzbek'
   backgroundUrl: string
   previewUrl: string

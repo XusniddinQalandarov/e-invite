@@ -9,9 +9,10 @@ import type { Invitation } from '@/types/invitation'
 interface Props {
   invitation: Invitation
   templateName: string
+  templatePrice: string
 }
 
-export function CheckoutClient({ invitation, templateName }: Props) {
+export function CheckoutClient({ invitation, templateName, templatePrice }: Props) {
   const { t } = useLanguage()
   const router = useRouter()
   const [paying, setPaying] = useState(false)
@@ -78,7 +79,7 @@ export function CheckoutClient({ invitation, templateName }: Props) {
         {/* Price */}
         <div className="flex items-center justify-between py-5 border-t border-b border-gold/15 mb-8">
           <span className="font-body text-sm text-brand-text/50">Total</span>
-          <span className="font-display text-3xl text-gold">{t.checkout.price}</span>
+          <span className="font-display text-3xl text-gold">{templatePrice}</span>
         </div>
 
         <Button onClick={handlePay} disabled={paying} size="lg" className="w-full">
